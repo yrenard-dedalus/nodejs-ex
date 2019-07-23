@@ -3,6 +3,19 @@ var express = require('express'),
     app     = express(),
     morgan  = require('morgan');
 
+// Declaration of a JSON logger
+const { createLogger, format, transports } = require('winston');
+const { combine, timestamp, label, json } = format;
+
+const logger = createLogger({
+  format: combine(
+    label({ label: 'main thread' }),
+    timestamp(),
+    json()
+  ),
+  transports: [new transports.Console()]
+})
+
 Object.assign=require('object-assign')
 
 app.engine('html', require('ejs').renderFile);
@@ -75,7 +88,14 @@ var initDb = function(callback) {
 
 app.get('/', function (req, res) {
 
-  console.log('\nFirst try to log something in console\n' );
+  console.log('ERROR\nThis is the error message\n' );
+
+  logger.log({
+  level: 'error',
+  message: 'This is the error message'
+});
+
+
 
 
 
