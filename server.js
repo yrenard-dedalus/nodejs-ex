@@ -88,11 +88,11 @@ var initDb = function(callback) {
 
 app.get('/', function (req, res) {
 
-  console.log('ERROR\nThis is the error message\n' );
+  console.log('ERROR\nThis is the error\n message\n' );
 
   logger.log({
   level: 'error',
-  message: 'This is the error message'
+  message: 'This is the error \n message'
 });
 
 
