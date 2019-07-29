@@ -147,4 +147,26 @@ initDb(function(err){
 app.listen(port, ip);
 console.log('Server running on http://%s:%s', ip, port);
 
+init();
+
 module.exports = app ;
+
+
+
+
+async function init(){
+  do {
+    let r = Math.random();
+    if (r<=0.7){
+      logger.info("There is a house");
+    }
+    else if ( r <= 0.9){
+      logger.warn("In charming town");
+    }
+    else {
+        logger.error("They call the rising sun");
+    }
+    await new Promise(done => setTimeout(done, 5000));
+  }
+  while (1);
+}
