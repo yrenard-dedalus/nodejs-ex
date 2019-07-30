@@ -160,19 +160,22 @@ async function init(){
     if (r<=0.7){
       logger.log({
         level: 'info',
-        message: 'Information message'
+        message: 'Information message',
+        severity: "info"
       });
     }
     else if ( r <= 0.9){
       logger.log({
         level: 'warn',
-        message: 'Warning message'
+        message: 'Warning message',
+        severity: 'warning'
       });
     }
     else {
       logger.log({
         level: 'error',
-        message: 'ERROR, something goes wrong'
+        message: 'ERROR, something goes wrong',
+        severity: 'error'
         });
     }
     await new Promise(done => setTimeout(done, 5000));
