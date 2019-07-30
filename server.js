@@ -158,13 +158,22 @@ async function init(){
   do {
     let r = Math.random();
     if (r<=0.7){
-      logger.info("There is a house");
+      logger.log({
+        level: 'info',
+        message: 'Information message'
+      });
     }
     else if ( r <= 0.9){
-      logger.warn("In charming town");
+      logger.log({
+        level: 'warn;',
+        message: 'Warning message'
+      });
     }
     else {
-        logger.error("They call the rising sun");
+      logger.log({
+        level: 'error',
+        message: 'ERROR, something goes wrong'
+        });
     }
     await new Promise(done => setTimeout(done, 5000));
   }
