@@ -165,7 +165,7 @@ async function init(){
     }
     else if ( r <= 0.9){
       logger.log({
-        level: 'warn;',
+        level: 'warn',
         message: 'Warning message'
       });
     }
