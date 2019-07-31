@@ -158,13 +158,16 @@ async function init(){
   do {
     let r = Math.random();
     if (r<=0.7){
-      logger.info('INFORMATION message');
+      logger.log({
+        level: 'info',
+        message: 'some random message'
+      });
     }
     else if ( r <= 0.9){
-      logger.warn('WARNING message');
+      logger.warn('something may go wrong message');
     }
     else {
-      logger.error('ERROR message');
+      logger.error('something goes wrong message');
     }
     await new Promise(done => setTimeout(done, 10000));
   }
