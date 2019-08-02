@@ -6,6 +6,9 @@ var express = require('express'),
 // Declaration of a JSON logger
 const { createLogger, format, transports } = require('winston');
 const { combine, timestamp, label, json } = format;
+const client = require('prom-client');
+
+const collectDefaultMetrics = client.collectDefaultMetrics;
 
 const logger = createLogger({
   format: combine(
