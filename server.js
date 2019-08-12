@@ -14,7 +14,7 @@ const prom_client = require('prom-client');
 const collectDefaultMetrics = prom_client.collectDefaultMetrics;
 
 //define a custom prefix for application metrics
-//collectDefaultMetrics({prefix:'node_server:'});
+collectDefaultMetrics({prefix:'node_server:'});
 
 const logger = createLogger({
   format: combine(
