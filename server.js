@@ -6,9 +6,15 @@ var express = require('express'),
 // Declaration of a JSON logger
 const { createLogger, format, transports } = require('winston');
 const { combine, timestamp, label, json } = format;
-const client = require('prom-client');
 
-const collectDefaultMetrics = client.collectDefaultMetrics;
+//use the prom-client module to expose Prometheus metrics
+const prom_client = require('prom-client');
+
+//enable prom-client to collect default metrics
+const collectDefaultMetrics = prom_client.collectDefaultMetrics;
+
+//define a custom prefix for application metrics
+collectDefaultMetrics({prefix:'node_server:'});
 
 const logger = createLogger({
   format: combine(
@@ -99,9 +105,6 @@ app.get('/', function (req, res) {
 });
 
 
-
-
-
   // try to initialize the db on every request if it's not already
   // initialized.
   if (!db) {
@@ -137,6 +140,11 @@ app.get('/pagecount', function (req, res) {
   }
 });
 
+app.get('/metrics', (req,res) => {
+  res.set('Content-Type', prom_client.register.contentType);
+  res.send(prom_client.register.metrics());
+})
+
 // error handling
 app.use(function(err, req, res, next){
   console.error(err.stack);
@@ -150,14 +158,14 @@ initDb(function(err){
 app.listen(port, ip);
 console.log('Server running on http://%s:%s', ip, port);
 
-init();
+log_something();
 
 module.exports = app ;
 
 
 
 
-async function init(){
+async function log_something(){
   do {
     let r = Math.random();
     if (r<=0.7){
